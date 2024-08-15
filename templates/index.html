@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Summarizer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+        input[type="text"] { width: 80%; padding: 10px; font-size: 1rem; }
+        button { padding: 10px 20px; font-size: 1rem; }
+        .result { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Website Summarizer</h1>
+    <form action="/generate/" method="post">
+        <label for="url">Enter website URL:</label><br>
+        <input type="text" id="url" name="url" required><br><br>
+        <button type="submit">Summarize</button>
+    </form>
+
+    {% if output %}
+    <div class="result">
+        <h2>Summary:</h2>
+        <p>{{ output }}</p>
+    </div>
+    {% endif %}
+</body>
+</html>
+
