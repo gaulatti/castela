@@ -1,6 +1,6 @@
 # Castela ownership and disposition audit
 
-Audit date: 2026-09-07
+Historical audit notes dated: 2026-09-07
 
 Default branch and audited commit: `main` at `a843cfe21a8e85afe9b9fb31ee6431c6c67a7bf9`
 
@@ -8,11 +8,23 @@ Default branch and audited commit: `main` at `a843cfe21a8e85afe9b9fb31ee6431c6c6
 
 **Disposition: archive after this audit lands on the default branch.**
 
-No live product, infrastructure, package, store, DNS, or repository consumer was verified. The one-commit repository is a non-portable prototype with no owner or delivery contract. Source and history remain available as recovery material; the GitHub archive control is a separate post-merge step so this notice is reviewable first.
+This disposition retires the preserved prototype and disables its launcher.
+Source and history remain available as recovery material; the GitHub archive
+control is a separate post-merge step so this notice is reviewable first.
+No supported product owner or delivery target is declared by this repository.
+That does not establish that external deployments or consumers are absent.
 
-## Evidence
+## Historical audit notes and evidence limits
 
-| Surface | Method | Result |
+The table preserves the observations recorded on 2026-09-07. The underlying
+GitHub, portfolio-search, DNS, AWS, and registry command outputs were not
+retained with this PR. Those external observations are unverified historical
+claims, not proof of current absence or of account-wide coverage. The
+2026-10-19 review checked source and the fail-closed launcher locally; it did
+not repeat the external audit or start the application. Archival must wait for
+the final control-plane refresh described below.
+
+| Surface | Recorded method | Recorded result (external claims unverified) |
 | --- | --- | --- |
 | Git source | GitHub metadata, branch, commit, tag, and tree APIs | Public, unarchived repository with one unprotected `main` branch, one commit dated 2024-08-15, no tags, no description, and no homepage. |
 | Source contract | Inspected every default-branch source path | A Flask page accepts a URL, fetches it, and passes the page text to `facebook/bart-large-cnn`. There is no README, package metadata, container definition, production server, or deployment configuration. |
@@ -35,7 +47,7 @@ Before this audit, the repository had no README or ownership contract and its ex
 After this audit:
 
 - the README records the archive disposition and recovery conditions;
-- `OWNERSHIP.md` preserves the evidence and unverified boundaries;
+- `OWNERSHIP.md` preserves the dated notes and explicitly identifies missing evidence;
 - the old launcher exits nonzero before installation, model download, or server startup;
 - a standard-library test guards the disposition and disabled launcher;
 - application source, committed environment artifacts, and Git history remain unchanged.
@@ -45,17 +57,20 @@ After this audit:
 | Check | Result |
 | --- | --- |
 | `bash -n Makefile` | Passed. |
-| `python3 -m py_compile app.py` | Passed; no application source changed. |
+| `python3` AST parsing of `app.py` | Passed in the 2026-10-19 review without importing the application; no application source changed. |
 | `python3 -m unittest discover -v` | Passes the archive-contract tests added by this audit. The original repository had no tests. |
 | `./Makefile` | Exits nonzero before any environment, network, package, model, or server action. |
 
 ## Residual unknowns
 
-- Only the configured AWS account was inspected. Another account or unnamed host could contain a copy.
-- The available GitHub token lacks account-wide package-read scope. No repository-local release or package reference exists.
+- The historical notes describe only a configured AWS account; no retained output establishes even that scope. Current cloud ownership and deployments are unknown. Another account or unnamed host could contain a copy.
+- The historical notes report insufficient account-wide package-read scope. Current package ownership and the current token's scope were not checked.
 - No inventory for external model registries, private servers, or developer workstations was available.
 
-These unknowns are not evidence of current ownership. The post-merge archive follow-up requires one final control-plane refresh and must stop if new live evidence appears.
+These unknowns establish neither current ownership nor its absence. The
+post-merge archive follow-up requires a fresh control-plane inventory with
+retained evidence and must stop if live ownership or a recovery dependency
+appears. Merging these source changes does not archive the repository.
 
 ## Recovery contract
 
